@@ -16,11 +16,13 @@ app.use('/api/books', bookRoutes)// format is /api/books/get, etc
 // connect to database:
 //starting the server:
 connectToDB().then(()=>{
+    if (require.main === module) {
     app.listen(PORT, ()=>{
         console.log(`Server successfully running on ${PORT}`);
-    })
+    })}
 })
 
+module.exports = app;
 
 
 
