@@ -1,213 +1,152 @@
-<h1 align="center">📚 Book Store API Backend</h1>
+# 📚 Book Store API Backend
 
-<p align="center">
-  A powerful and scalable REST API for managing an online bookstore built with Node.js, Express, and MongoDB.
+A RESTful API backend for a Book Store application built with **Node.js**, **Express**, and **MongoDB (Mongoose)**. The project follows a clean MVC architecture with separate layers for routes, controllers, models, and database configuration.
+
+---
+
+## 🚀 Tech Stack
+
+<p align="left">
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js"/>
+  <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express"/>
+  <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB"/>
+  <img src="https://img.shields.io/badge/Mongoose-880000?style=for-the-badge&logo=mongoose&logoColor=white" alt="Mongoose"/>
+  <img src="https://img.shields.io/badge/dotenv-ECD53F?style=for-the-badge&logo=dotenv&logoColor=black" alt="dotenv"/>
+  <img src="https://img.shields.io/badge/Nodemon-76D04B?style=for-the-badge&logo=nodemon&logoColor=white" alt="Nodemon"/>
 </p>
 
-<p align="center">
-  
-  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white"/>
-  <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white"/>
-  <img src="https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=jsonwebtokens"/>
-  <img src="https://img.shields.io/badge/Bcrypt-orange?style=for-the-badge"/>
-  <img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white"/>
-
-</p>
-
 ---
 
-# 🚀 Features
+## 📁 Project Structure
 
-✅ User Authentication & Authorization  
-✅ JWT Secure Login System  
-✅ Password Hashing using bcrypt  
-✅ CRUD Operations for Books  
-✅ RESTful API Architecture  
-✅ MongoDB Database Integration  
-✅ Middleware-based Error Handling  
-✅ Environment Variable Configuration  
-
----
-
-# 🛠️ Tech Stack
-
-| Technology | Usage |
-|---|---|
-| ⚡ Node.js | Backend Runtime |
-| 🚂 Express.js | Server Framework |
-| 🍃 MongoDB | Database |
-| 🧩 Mongoose | ODM |
-| 🔐 JWT | Authentication |
-| 🔒 bcryptjs | Password Security |
-| 🌱 dotenv | Environment Variables |
-
----
-
-# 📂 Folder Structure
-
-```bash
+```
 Book-Store-Api-Backend/
-│
-├── controllers/
-├── middleware/
-├── models/
-├── routes/
-├── config/
-│
-├── .env
-├── server.js
-├── package.json
-└── README.md
+├── controllers/       # Business logic for each route
+├── database/          # MongoDB connection setup
+├── models/            # Mongoose schemas/models
+├── routes/            # Express route definitions
+├── server.js          # App entry point
+├── .gitignore
+└── package.json
 ```
 
 ---
 
-# ⚙️ Installation
+## ⚙️ Prerequisites
 
-## 1️⃣ Clone Repository
+- [Node.js](https://nodejs.org/) v16 or higher
+- [MongoDB](https://www.mongodb.com/) (local instance or MongoDB Atlas)
+- npm
+
+---
+
+## 🛠️ Getting Started
+
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/karthik032507/Book-Store-Api-Backend.git
-```
-
-## 2️⃣ Move to Project Directory
-
-```bash
 cd Book-Store-Api-Backend
 ```
 
-## 3️⃣ Install Dependencies
+### 2. Install dependencies
 
 ```bash
 npm install
 ```
 
-## 4️⃣ Setup Environment Variables
+### 3. Configure environment variables
 
 Create a `.env` file in the root directory:
 
 ```env
 PORT=5000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_secret_key
+MONGO_URI=mongodb://localhost:27017/bookstore
 ```
 
-## 5️⃣ Run the Server
+> Replace `MONGO_URI` with your MongoDB Atlas connection string if using the cloud.
 
-### Production
+### 4. Run the server
 
 ```bash
+# Development (with auto-reload)
+npm run dev
+
+# Production
 npm start
 ```
 
-### Development
-
-```bash
-npm run dev
-```
+The server will start at `http://localhost:5000` (or the port specified in `.env`).
 
 ---
 
-# 📌 API Endpoints
+## 📡 API Endpoints
 
-# 🔑 Authentication Routes
+> Base URL: `http://localhost:5000`
+
+### Books
 
 | Method | Endpoint | Description |
 |---|---|---|
-| POST | `/api/auth/register` | Register User |
-| POST | `/api/auth/login` | Login User |
+| GET | `/api/books` | Get all books |
+| GET | `/api/books/:id` | Get a single book by ID |
+| POST | `/api/books` | Create a new book |
+| PUT | `/api/books/:id` | Update a book by ID |
+| DELETE | `/api/books/:id` | Delete a book by ID |
 
----
-
-# 📚 Book Routes
-
-| Method | Endpoint | Description |
-|---|---|---|
-| GET | `/api/books` | Fetch All Books |
-| GET | `/api/books/:id` | Fetch Single Book |
-| POST | `/api/books` | Add New Book |
-| PUT | `/api/books/:id` | Update Book |
-| DELETE | `/api/books/:id` | Delete Book |
-
----
-
-# 🧪 Example Request
-
-## Register User
+### Example Request Body (POST / PUT)
 
 ```json
 {
-  "name": "Karthik",
-  "email": "karthik@example.com",
-  "password": "123456"
+  "title": "The Pragmatic Programmer",
+  "author": "Andrew Hunt",
+  "price": 499,
+  "publishYear": 1999
 }
 ```
 
 ---
 
-## Login User
+## 🧪 Testing the API
 
-```json
-{
-  "email": "karthik@example.com",
-  "password": "123456"
-}
-```
+You can test the endpoints using:
 
----
-
-# 🔐 Authentication
-
-Protected routes require JWT Token:
+- [Postman](https://www.postman.com/)
+- [Thunder Client](https://www.thunderclient.com/) (VS Code extension)
+- `curl` from the terminal
 
 ```bash
-Authorization: Bearer your_token
+# Example: Get all books
+curl http://localhost:5000/api/books
 ```
 
 ---
 
-# 🌟 Future Improvements
+## 📦 Scripts
 
-- 📖 Book Categories
-- ⭐ Reviews & Ratings
-- 🛒 Cart Functionality
-- 💳 Payment Integration
-- 👨‍💼 Admin Dashboard
-- 📄 Swagger Documentation
+| Command | Description |
+|---|---|
+| `npm start` | Start the server in production mode |
+| `npm run dev` | Start the server in development mode with Nodemon |
 
 ---
 
-# 🤝 Contributing
+## 🤝 Contributing
 
-Contributions are welcome!
-
-1. Fork the project  
-2. Create your feature branch  
-3. Commit your changes  
-4. Push to the branch  
-5. Open a Pull Request  
+1. Fork the repository
+2. Create a new branch: `git checkout -b feature/your-feature-name`
+3. Commit your changes: `git commit -m 'Add some feature'`
+4. Push to the branch: `git push origin feature/your-feature-name`
+5. Open a pull request
 
 ---
 
-# 👨‍💻 Author
+## 📄 License
 
-### Karthik
-
-<p align="left">
-  <a href="https://github.com/karthik032507">
-    <img src="https://img.shields.io/badge/GitHub-Profile-black?style=for-the-badge&logo=github"/>
-  </a>
-</p>
+This project is licensed under the **ISC License**.
 
 ---
 
-# 📜 License
+## 👤 Author
 
-This project is licensed under the MIT License.
-
----
-
-<p align="center">
-  ⭐ If you like this project, don't forget to star the repository!
-</p>
+**Karthik** — [@karthik032507](https://github.com/karthik032507)
